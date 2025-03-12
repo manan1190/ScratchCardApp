@@ -1,7 +1,7 @@
 services:
   # Backend service configuration
   - name: backend
-    type: web_service
+    type: web
     runtime: node
     plan: free
     region: oregon
