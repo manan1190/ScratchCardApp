@@ -1,0 +1,26 @@
+[
+  {
+    "id": "94baa374-14b0-4b4c-8a7a-1156f6f2c8d5",
+    "amount": 20,
+    "createdAt": "2025-03-11T22:58:44.919Z",
+    "scratched": true
+  },
+  {
+    "id": "65590fff-0498-4239-8923-252c6eb9dc4c",
+    "amount": 20,
+    "createdAt": "2025-03-11T23:34:08.770Z",
+    "scratched": true
+  },
+  {
+    "id": "164c5853-18b8-4e33-9ab3-9d5c347226f5",
+    "amount": 0,
+    "createdAt": "2025-03-11T23:46:27.431Z",
+    "scratched": true
+  },
+  {
+    "id": "dba03ef8-e681-4e8c-b316-775b0bd0912e",
+    "amount": 25,
+    "createdAt": "2025-03-11T23:53:03.408Z",
+    "scratched": false
+  }
+]
