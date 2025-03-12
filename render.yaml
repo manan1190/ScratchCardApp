@@ -16,11 +16,10 @@ services:
 
   # Frontend service configuration
   - name: frontend
-    type: static_site
+    type: static_site  # This is the correct type for static sites
     buildCommand: "npm run build"
     startCommand: "serve -s build"
     plan: free
-    port: 3000
     environment:
       REACT_APP_API_URL: "https://api.example.com"
       REACT_APP_ENV: "production"
