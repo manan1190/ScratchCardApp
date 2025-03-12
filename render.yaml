@@ -16,7 +16,8 @@ services:
 
   # Frontend service configuration
   - name: frontend
-    type: static_site  # This is the correct type for static sites
+    type: web
+    env: node
     buildCommand: "npm run build"
     startCommand: "serve -s build"
     plan: free
