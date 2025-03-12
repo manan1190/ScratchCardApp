@@ -1,32 +1,24 @@
 services:
   # Backend service configuration
   - name: backend
-    type: web
-    env: node
+    type: web_service
+    runtime: node
+    plan: free
+    region: oregon
     buildCommand: "npm install"
     startCommand: "npm start"
-    plan: free
-    port: 5000
-    healthCheck:
-      path: /health
-      intervalSeconds: 30
-      timeoutSeconds: 10
-      gracePeriodSeconds: 30
-      maxAttempts: 5
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: NODE_ENV
+        value: production
 
   # Frontend service configuration
   - name: frontend
     type: web
-    env: node
-    buildCommand: "npm run build"
-    startCommand: "serve -s build"
-    plan: free
-    environment:
-      REACT_APP_API_URL: "https://api.example.com"
-      REACT_APP_ENV: "production"
-    healthCheck:
-      path: /health
-      intervalSeconds: 30
-      timeoutSeconds: 10
-      gracePeriodSeconds: 30
-      maxAttempts: 5
+    runtime: node
+    buildCommand: "react-scripts build"
+    startCommand: "react-scripts start"
+    envVars:
+      - key: REACT_APP_API_URL
+        value: "https://api.example.com"
