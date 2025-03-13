@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import ScratchCardPage from './ScratchCardPage';
-import ScratchCardShare from './ScratchCard';
+//import ScratchCardShare from './ScratchCard';
+import ScratchCard from './ScratchCard';
 import LoginPage from './LoginPage';
 import './App.css';
 
@@ -12,7 +13,8 @@ function AppRoutes({ isAuthenticated, setIsAuthenticated }) {
   if (location.pathname.startsWith('/scratch-card/')) {
     return (
       <Routes>
-        <Route path="/scratch-card/:id" element={<ScratchCardShare />} />
+        {/* <Route path="/scratch-card/:id" element={<ScratchCardShare />} /> */}
+        <Route path="/scratch-card/:id" element={<ScratchCard />} />
         <Route path="*" element={<Navigate to={location.pathname} />} />
       </Routes>
     );
