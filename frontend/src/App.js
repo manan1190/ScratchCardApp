@@ -9,7 +9,7 @@ import './App.css';
 function AppRoutes({ isAuthenticated, setIsAuthenticated }) {
   const location = useLocation();
   
-  // Restrict navigation when viewing a shared card
+  // Public route for viewing shared scratch cards
   if (location.pathname.startsWith('/scratch-card/')) {
     return (
       <Routes>
@@ -24,20 +24,12 @@ function AppRoutes({ isAuthenticated, setIsAuthenticated }) {
     <Routes>
       <Route
         path="/"
-        element={
-          isAuthenticated ?
-            <ScratchCardPage /> :
-            <Navigate to="/login" />
-        }
+        element={isAuthenticated ? <ScratchCardPage /> : <Navigate to="/login" />}
       />
       <Route
         path="/login"
-        element={
-          isAuthenticated ?
-            <Navigate to="/" /> :
-            <LoginPage onLogin={() => setIsAuthenticated(true)} />
-          }
-        />
+        element={isAuthenticated ? <Navigate to="/" /> : <LoginPage onLogin={() => setIsAuthenticated(true)} />}
+      />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

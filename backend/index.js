@@ -4,10 +4,19 @@ const bodyParser = require('body-parser');
 const fs = require('fs').promises;
 const { v4: uuidv4 } = require('uuid');
 
+require('dotenv').config();
+
 const app = express();
 const port = 5000;
 
-app.use(cors());
+const frontendUrl = process.env.REACT_APP_FRONTEND_URL;
+
+app.use(cors({
+  origin: frontendUrl,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
 app.use(bodyParser.json());
 
 const dataFilePath = './data.json';
@@ -15,6 +24,7 @@ const dataFilePath = './data.json';
 // Read all cards
 app.get('/api/cards', async (req, res) => {
   try {
+    console.log("Inside Cards")
     const data = await fs.readFile(dataFilePath, 'utf8');
     const cards = JSON.parse(data);
     res.json(cards);
@@ -86,4 +96,5 @@ app.patch('/api/cards/:id/scratch', async (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
+  console.log("Frontend URL:", frontendUrl);
 });
