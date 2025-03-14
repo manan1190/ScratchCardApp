@@ -13,15 +13,15 @@ function AppRoutes({ isAuthenticated, setIsAuthenticated }) {
   if (location.pathname.startsWith('/scratch-card/')) {
     return (
       <Routes>
-        {/* <Route path="/scratch-card/:id" element={<ScratchCardShare />} /> */}
-        <Route path="/scratch-card/:id" element={<ScratchCard />} />
-        <Route path="*" element={<Navigate to={location.pathname} />} />
+        {/* Public Route: Accessible to Everyone */}        
+        <Route path="/scratch-card/:id" element={<ScratchCard />} />        
       </Routes>
     );
   }
 
   return (
     <Routes>
+      {/* Protected Routes */}
       <Route
         path="/"
         element={isAuthenticated ? <ScratchCardPage /> : <Navigate to="/login" />}
@@ -30,6 +30,7 @@ function AppRoutes({ isAuthenticated, setIsAuthenticated }) {
         path="/login"
         element={isAuthenticated ? <Navigate to="/" /> : <LoginPage onLogin={() => setIsAuthenticated(true)} />}
       />
+      {/* Catch-All Route */}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

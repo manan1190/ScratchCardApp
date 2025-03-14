@@ -13,9 +13,12 @@ const frontendUrl = process.env.REACT_APP_FRONTEND_URL;
 
 app.use(cors({
   origin: frontendUrl,
-  methods: ['GET', 'POST', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
+// Enable preflight requests for all routes
+app.options("*", cors());
 
 app.use(bodyParser.json());
 
