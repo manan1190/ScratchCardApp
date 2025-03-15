@@ -1,37 +1,36 @@
 import React, { useState } from 'react';
-import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import ScratchCardPage from './ScratchCardPage';
 //import ScratchCardShare from './ScratchCard';
 import ScratchCard from './ScratchCard';
 import LoginPage from './LoginPage';
+import HomePage from './HomePage';
+import PrivateRoute from './PrivateRoute';
 import './App.css';
 
-function AppRoutes({ isAuthenticated, setIsAuthenticated }) {
-  const location = useLocation();
+function AppRoutes({ isAuthenticated, setIsAuthenticated }) {  
   
-  // Public route for viewing shared scratch cards
-  if (location.pathname.startsWith('/scratch-card/')) {
-    return (
-      <Routes>
-        {/* Public Route: Accessible to Everyone */}        
-        <Route path="/scratch-card/:id" element={<ScratchCard />} />        
-      </Routes>
-    );
-  }
-
   return (
-    <Routes>
+    <Routes>      
+        {/* Public Route: Accessible to Everyone */}        
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/login"
+          element={isAuthenticated ? <Navigate to="/dashboard" /> : <LoginPage onLogin={() => setIsAuthenticated(true)} />}
+        />
+        <Route exact path="/scratch-card/:id" element={<ScratchCard />} />        
+
       {/* Protected Routes */}
-      <Route
-        path="/"
-        element={isAuthenticated ? <ScratchCardPage /> : <Navigate to="/login" />}
-      />
-      <Route
-        path="/login"
-        element={isAuthenticated ? <Navigate to="/" /> : <LoginPage onLogin={() => setIsAuthenticated(true)} />}
-      />
+      <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
+        <Route
+          path="/dashboard"
+          element={<ScratchCardPage />} 
+        />
+      </Route>
+
       {/* Catch-All Route */}
-      <Route path="*" element={<Navigate to="/" />} />
+      {/* Redirect unknown routes */}
+      <Route path="*" element={<HomePage />} />
     </Routes>
   );
 }

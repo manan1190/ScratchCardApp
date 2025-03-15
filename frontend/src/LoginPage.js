@@ -14,8 +14,9 @@ function LoginPage({ onLogin }) {
       username === process.env.REACT_APP_LOGIN_USERNAME &&
       password === process.env.REACT_APP_LOGIN_PASSWORD
     ) {
-      onLogin();
-      navigate('/');
+      // Assume login is successful
+      onLogin(); // Update authentication state
+      navigate('/dashboard'); // 👈 Redirect after login
     } else {
       setError('Invalid username or password');
     }
