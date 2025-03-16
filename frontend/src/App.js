@@ -10,7 +10,7 @@ import './App.css';
 
 function AppRoutes({ isAuthenticated, setIsAuthenticated }) {  
   
-  return (
+  return (    
     <Routes>      
         {/* Public Route: Accessible to Everyone */}        
         <Route path="/" element={<HomePage />} />
@@ -18,7 +18,7 @@ function AppRoutes({ isAuthenticated, setIsAuthenticated }) {
           path="/login"
           element={isAuthenticated ? <Navigate to="/dashboard" /> : <LoginPage onLogin={() => setIsAuthenticated(true)} />}
         />
-        <Route exact path="/scratch-card/:id" element={<ScratchCard />} />        
+        <Route path="/scratch-card/:id" element={<ScratchCard />} />        
 
       {/* Protected Routes */}
       <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
@@ -31,7 +31,7 @@ function AppRoutes({ isAuthenticated, setIsAuthenticated }) {
       {/* Catch-All Route */}
       {/* Redirect unknown routes */}
       <Route path="*" element={<HomePage />} />
-    </Routes>
+    </Routes>    
   );
 }
 

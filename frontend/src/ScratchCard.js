@@ -17,6 +17,7 @@ useEffect(() => {
       setLoading(true);
       try {
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/cards/${id}`);
+      
         if (!response.ok) {
           throw new Error(`Failed to fetch card: ${response.status}`);
         }
